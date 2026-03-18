@@ -1,41 +1,74 @@
-# Link Building SaaS Website Data Management
+# Link Building SaaS (Production Foundation)
 
-Simple SaaS-style web app to manage and browse link-building website inventory.
+Production-ready SaaS starter for managing link-building website inventory with admin/client roles.
 
-## Features
+## What this includes
 
-- **Admin view** for managing website inventory
-  - Add, edit, and delete websites
-  - Track:
-    - Website Name
-    - URL
-    - Owner Name
-    - Email
-    - Phone
-    - Website Price (General Niche)
-    - Website Price (Sensitive Niche: casino, CBD, forex, etc.)
-    - DA
-    - DR
-    - Backlinks Pointing
-    - Trust Flow
-    - Language
-    - Region
-    - Niche Type
-    - Note section
-- **Client view** to browse all websites
-  - Search and filter by niche, language, region, DA, and max price
-- **Summary cards** for quick marketplace stats
-- Local storage persistence in browser
+### Backend (Express + SQLite)
 
-## Run
+- Secure API with:
+  - `helmet`
+  - rate limiting
+  - CORS allowlist
+- JWT authentication
+- Role-based authorization:
+  - `admin` can create/update/delete websites
+  - `client` can browse/filter websites
+- SQLite persistence (`better-sqlite3`) with automatic schema migration/bootstrapping
+- Seeded default admin user and sample website records
 
-This is a static frontend project.
+### Frontend (vanilla SPA in `/public`)
 
-1. Open `index.html` directly in the browser, or
-2. Serve with a static server (example):
+- Login + registration flows
+- Authenticated dashboard
+- Admin management panel for CRUD
+- Client catalog table with filter support
+- Summary stats cards
+
+## Tracked website stats
+
+- Website Name
+- URL
+- Owner Name
+- Email
+- Phone
+- Price (General Niche)
+- Price (Sensitive Niche: casino, CBD, forex, etc.)
+- DA
+- DR
+- Backlinks Pointing
+- Trust Flow
+- Language
+- Region
+- Niche Type
+- Note
+
+## API overview
+
+- `POST /api/auth/register`
+- `POST /api/auth/login`
+- `GET /api/auth/me`
+- `GET /api/websites/stats`
+- `GET /api/websites`
+- `POST /api/websites` (admin only)
+- `PUT /api/websites/:id` (admin only)
+- `DELETE /api/websites/:id` (admin only)
+
+## Setup
 
 ```bash
-python3 -m http.server 8080
+npm install
+cp .env.example .env
+npm run dev
 ```
 
-Then open `http://localhost:8080`.
+Open `http://localhost:3000`.
+
+## Default admin
+
+Configured through environment variables:
+
+- `DEFAULT_ADMIN_EMAIL`
+- `DEFAULT_ADMIN_PASSWORD`
+
+Set these in `.env` before running in shared environments.

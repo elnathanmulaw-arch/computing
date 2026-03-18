@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Link Building SaaS</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="page">
+      <section id="auth-section" class="auth-section">
+        <div class="brand-block">
+          <p class="eyebrow">Production SaaS</p>
+          <h1>Link Building Platform</h1>
+          <p class="muted">
+            Centralized marketplace to manage publisher websites, pricing, SEO authority metrics, and notes.
+          </p>
+          <p class="muted small">
+            Default admin account comes from <code>DEFAULT_ADMIN_EMAIL</code> and
+            <code>DEFAULT_ADMIN_PASSWORD</code>.
+          </p>
+        </div>
+
+        <div class="auth-grid">
+          <form id="login-form" class="panel">
+            <h2>Login</h2>
+            <label>
+              Email
+              <input name="email" type="email" required />
+            </label>
+            <label>
+              Password
+              <input name="password" type="password" required />
+            </label>
+            <button type="submit">Sign in</button>
+          </form>
+
+          <form id="register-form" class="panel">
+            <h2>Create Client Account</h2>
+            <label>
+              Full Name
+              <input name="name" type="text" required />
+            </label>
+            <label>
+              Email
+              <input name="email" type="email" required />
+            </label>
+            <label>
+              Password
+              <input name="password" type="password" minlength="8" required />
+            </label>
+            <label>
+              Register As
+              <select name="role">
+                <option value="client">Client</option>
+                <option value="admin">Admin (invite only)</option>
+              </select>
+            </label>
+            <label>
+              Admin Invite Code (if admin)
+              <input name="adminInviteCode" type="text" />
+            </label>
+            <button type="submit">Create account</button>
+          </form>
+        </div>
+      </section>
+
+      <section id="app-section" class="hidden">
+        <header class="app-header panel">
+          <div>
+            <p class="eyebrow">Website Data Management</p>
+            <h2>Link Building SaaS Dashboard</h2>
+          </div>
+          <div class="inline-actions">
+            <span id="user-badge" class="chip"></span>
+            <button id="logout-btn" class="secondary" type="button">Logout</button>
+          </div>
+        </header>
+
+        <section id="summary-cards" class="summary-grid"></section>
+
+        <section id="admin-panel" class="panel hidden">
+          <h3>Admin: Manage Websites</h3>
+          <p class="muted">
+            Admins can create, update, and delete website inventory records for clients.
+          </p>
+
+          <form id="website-form" class="website-form">
+            <input type="hidden" name="id" />
+            <label>
+              Website Name
+              <input name="websiteName" type="text" required />
+            </label>
+            <label>
+              Website URL
+              <input name="url" type="url" required />
+            </label>
+            <label>
+              Owner Name
+              <input name="ownerName" type="text" required />
+            </label>
+            <label>
+              Email
+              <input name="email" type="email" required />
+            </label>
+            <label>
+              Phone
+              <input name="phone" type="text" required />
+            </label>
+            <label>
+              Price (General Niche)
+              <input name="priceGeneral" type="number" min="0" step="0.01" required />
+            </label>
+            <label>
+              Price (Sensitive Niche)
+              <input name="priceSensitive" type="number" min="0" step="0.01" required />
+            </label>
+            <label>
+              DA
+              <input name="da" type="number" min="0" max="100" required />
+            </label>
+            <label>
+              DR
+              <input name="dr" type="number" min="0" max="100" required />
+            </label>
+            <label>
+              Backlinks Pointing
+              <input name="backlinksPointing" type="number" min="0" required />
+            </label>
+            <label>
+              Trust Flow
+              <input name="trustFlow" type="number" min="0" max="100" required />
+            </label>
+            <label>
+              Language
+              <input name="language" type="text" required />
+            </label>
+            <label>
+              Region
+              <input name="region" type="text" required />
+            </label>
+            <label>
+              Niche Type
+              <select name="nicheType" required>
+                <option value="General">General</option>
+                <option value="Sensitive">Sensitive</option>
+                <option value="Mixed">Mixed</option>
+              </select>
+            </label>
+            <label class="full">
+              Notes
+              <textarea name="note" rows="3"></textarea>
+            </label>
+            <div class="full inline-actions">
+              <button id="save-website-btn" type="submit">Save Website</button>
+              <button id="clear-website-btn" class="secondary" type="button">Clear</button>
+            </div>
+          </form>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Website</th>
+                  <th>Owner</th>
+                  <th>General</th>
+                  <th>Sensitive</th>
+                  <th>DA/DR</th>
+                  <th>Backlinks</th>
+                  <th>TF</th>
+                  <th>Language</th>
+                  <th>Region</th>
+                  <th>Niche</th>
+                  <th>Note</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="admin-table-body"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h3>Client Catalog</h3>
+          <p class="muted">Clients can browse and filter websites and metrics.</p>
+
+          <div class="filters">
+            <label>
+              Search
+              <input id="search" type="search" placeholder="Website, URL, owner, email..." />
+            </label>
+            <label>
+              Niche
+              <select id="filter-niche">
+                <option value="">All</option>
+                <option value="General">General</option>
+                <option value="Sensitive">Sensitive</option>
+                <option value="Mixed">Mixed</option>
+              </select>
+            </label>
+            <label>
+              Language
+              <input id="filter-language" type="text" placeholder="All" />
+            </label>
+            <label>
+              Region
+              <input id="filter-region" type="text" placeholder="All" />
+            </label>
+            <label>
+              Min DA
+              <input id="filter-min-da" type="number" min="0" max="100" />
+            </label>
+            <label>
+              Max General Price
+              <input id="filter-max-price" type="number" min="0" />
+            </label>
+            <div class="inline-actions">
+              <button id="apply-filters-btn" type="button">Apply filters</button>
+              <button id="clear-filters-btn" class="secondary" type="button">Clear</button>
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Website Name</th>
+                  <th>URL</th>
+                  <th>Owner Name</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th>General Price</th>
+                  <th>Sensitive Price</th>
+                  <th>DA</th>
+                  <th>DR</th>
+                  <th>Backlinks Pointing</th>
+                  <th>Trust Flow</th>
+                  <th>Language</th>
+                  <th>Region</th>
+                  <th>Niche</th>
+                  <th>Note</th>
+                </tr>
+              </thead>
+              <tbody id="client-table-body"></tbody>
+            </table>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <div id="toast" class="toast hidden" aria-live="polite"></div>
+    <script src="/app.js"></script>
+  </body>
+</html>
