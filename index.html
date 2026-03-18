@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Computing AI Studio — Powered by Pollinations</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="https://pollinations.ai/favicon.ico">
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <h1>🌸 Computing AI Studio</h1>
+      <p class="tagline">Image &amp; Text Generation — Powered by <a href="https://pollinations.ai" target="_blank" rel="noopener">Pollinations.ai</a></p>
+    </div>
+  </header>
+
+  <main>
+    <nav class="tabs" role="tablist">
+      <button class="tab active" data-tab="image" role="tab" aria-selected="true">🎨 Image Generation</button>
+      <button class="tab" data-tab="text" role="tab" aria-selected="false">💬 Text Generation</button>
+    </nav>
+
+    <!-- Image Generation Panel -->
+    <section id="panel-image" class="panel active">
+      <form id="image-form" class="gen-form">
+        <label for="image-prompt">Describe the image you want to create</label>
+        <textarea id="image-prompt" rows="3" placeholder="A serene Japanese garden with cherry blossoms at sunset, digital art style"></textarea>
+
+        <div class="form-row">
+          <div class="field">
+            <label for="image-width">Width</label>
+            <input type="number" id="image-width" value="1024" min="256" max="2048" step="64">
+          </div>
+          <div class="field">
+            <label for="image-height">Height</label>
+            <input type="number" id="image-height" value="1024" min="256" max="2048" step="64">
+          </div>
+          <div class="field">
+            <label for="image-model">Model</label>
+            <select id="image-model">
+              <option value="flux">Flux</option>
+              <option value="flux-realism">Flux Realism</option>
+              <option value="flux-anime">Flux Anime</option>
+              <option value="flux-3d">Flux 3D</option>
+              <option value="flux-cablyai">Flux CablyAI</option>
+              <option value="turbo">Turbo</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="field">
+            <label for="image-seed">Seed (optional)</label>
+            <input type="number" id="image-seed" placeholder="Random">
+          </div>
+          <div class="field checkbox-field">
+            <input type="checkbox" id="image-nologo" checked>
+            <label for="image-nologo">Remove watermark</label>
+          </div>
+          <div class="field checkbox-field">
+            <input type="checkbox" id="image-enhance" checked>
+            <label for="image-enhance">Enhance prompt</label>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-generate" id="btn-gen-image">
+          <span class="btn-text">Generate Image</span>
+          <span class="btn-loading hidden">Generating…</span>
+        </button>
+      </form>
+
+      <div id="image-result" class="result-area hidden">
+        <div id="image-loader" class="loader hidden">
+          <div class="spinner"></div>
+          <p>Creating your image…</p>
+        </div>
+        <img id="generated-image" alt="Generated image" />
+        <div class="image-actions hidden" id="image-actions">
+          <a id="download-link" class="btn-secondary" download="pollinations-image.jpg">⬇ Download</a>
+          <button id="btn-copy-url" class="btn-secondary">🔗 Copy URL</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Text Generation Panel -->
+    <section id="panel-text" class="panel">
+      <form id="text-form" class="gen-form">
+        <label for="text-prompt">Enter your prompt</label>
+        <textarea id="text-prompt" rows="3" placeholder="Write a short poem about the beauty of code"></textarea>
+
+        <div class="form-row">
+          <div class="field">
+            <label for="text-model">Model</label>
+            <select id="text-model">
+              <option value="openai">OpenAI</option>
+              <option value="mistral">Mistral</option>
+              <option value="llama">Llama</option>
+              <option value="deepseek">DeepSeek</option>
+              <option value="command-r">Command R</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="text-system">System prompt (optional)</label>
+            <input type="text" id="text-system" placeholder="You are a helpful assistant">
+          </div>
+        </div>
+
+        <button type="submit" class="btn-generate" id="btn-gen-text">
+          <span class="btn-text">Generate Text</span>
+          <span class="btn-loading hidden">Generating…</span>
+        </button>
+      </form>
+
+      <div id="text-result" class="result-area hidden">
+        <div id="text-loader" class="loader hidden">
+          <div class="spinner"></div>
+          <p>Thinking…</p>
+        </div>
+        <div id="generated-text" class="text-output"></div>
+        <div class="text-actions hidden" id="text-actions">
+          <button id="btn-copy-text" class="btn-secondary">📋 Copy Text</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Built with the free <a href="https://pollinations.ai" target="_blank" rel="noopener">Pollinations.ai</a> API &bull;
+    <a href="https://github.com/elnathanmulaw-arch/computing" target="_blank" rel="noopener">Source on GitHub</a></p>
+  </footer>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
