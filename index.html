@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Link Building SaaS</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <div>
+        <p class="eyebrow">Website Data Management</p>
+        <h1>Link Building SaaS Dashboard</h1>
+      </div>
+      <div class="view-switch" role="tablist" aria-label="Dashboard View Selector">
+        <button id="admin-view-btn" class="active" type="button">Admin View</button>
+        <button id="client-view-btn" type="button">Client View</button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="summary-grid" id="summary-cards" aria-live="polite"></section>
+
+      <section id="admin-view" class="panel">
+        <h2>Admin: Manage Websites</h2>
+        <p class="panel-subtext">
+          Add, edit, and remove website opportunities. Prices support both general niche and sensitive niche
+          (casino, CBD, forex, etc.).
+        </p>
+
+        <form id="website-form" class="website-form">
+          <input type="hidden" id="website-id" />
+
+          <label>
+            Website Name
+            <input id="website-name" type="text" required />
+          </label>
+          <label>
+            Website URL
+            <input id="website-url" type="url" required placeholder="https://example.com" />
+          </label>
+          <label>
+            Owner Name
+            <input id="owner-name" type="text" required />
+          </label>
+          <label>
+            Email
+            <input id="owner-email" type="email" required />
+          </label>
+          <label>
+            Phone
+            <input id="owner-phone" type="tel" required />
+          </label>
+          <label>
+            Price (General Niche)
+            <input id="price-general" type="number" min="0" step="0.01" required />
+          </label>
+          <label>
+            Price (Sensitive Niche)
+            <input id="price-sensitive" type="number" min="0" step="0.01" required />
+          </label>
+          <label>
+            DA
+            <input id="da" type="number" min="0" max="100" required />
+          </label>
+          <label>
+            DR
+            <input id="dr" type="number" min="0" max="100" required />
+          </label>
+          <label>
+            Backlinks Pointing
+            <input id="backlinks" type="number" min="0" required />
+          </label>
+          <label>
+            Trust Flow
+            <input id="trust-flow" type="number" min="0" max="100" required />
+          </label>
+          <label>
+            Language
+            <input id="language" type="text" required placeholder="English" />
+          </label>
+          <label>
+            Region
+            <input id="region" type="text" required placeholder="North America" />
+          </label>
+          <label>
+            Niche Type
+            <select id="niche-type" required>
+              <option value="General">General</option>
+              <option value="Sensitive">Sensitive</option>
+              <option value="Mixed">Mixed</option>
+            </select>
+          </label>
+          <label class="full-width">
+            Note
+            <textarea id="note" rows="3" placeholder="Any publisher notes, turnaround time, restrictions, etc."></textarea>
+          </label>
+
+          <div class="form-actions full-width">
+            <button type="submit" id="save-btn">Save Website</button>
+            <button type="button" id="reset-btn" class="secondary">Clear</button>
+          </div>
+        </form>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Website</th>
+                <th>Owner</th>
+                <th>General Price</th>
+                <th>Sensitive Price</th>
+                <th>DA / DR</th>
+                <th>Backlinks</th>
+                <th>Trust Flow</th>
+                <th>Language</th>
+                <th>Region</th>
+                <th>Niche</th>
+                <th>Note</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="admin-table-body"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="client-view" class="panel hidden">
+        <h2>Client: Browse Available Websites</h2>
+        <p class="panel-subtext">Filter by niche, language, region, and minimum authority metrics.</p>
+
+        <div class="filters">
+          <label>
+            Search
+            <input type="search" id="client-search" placeholder="Website name, URL, owner..." />
+          </label>
+          <label>
+            Niche
+            <select id="client-niche">
+              <option value="All">All</option>
+              <option value="General">General</option>
+              <option value="Sensitive">Sensitive</option>
+              <option value="Mixed">Mixed</option>
+            </select>
+          </label>
+          <label>
+            Language
+            <select id="client-language">
+              <option value="All">All</option>
+            </select>
+          </label>
+          <label>
+            Region
+            <select id="client-region">
+              <option value="All">All</option>
+            </select>
+          </label>
+          <label>
+            Min DA
+            <input type="number" id="client-min-da" min="0" max="100" value="0" />
+          </label>
+          <label>
+            Max General Price
+            <input type="number" id="client-max-price" min="0" placeholder="No cap" />
+          </label>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Website Name</th>
+                <th>URL</th>
+                <th>Owner Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>General Price</th>
+                <th>Sensitive Price</th>
+                <th>DA</th>
+                <th>DR</th>
+                <th>Backlinks Pointing</th>
+                <th>Trust Flow</th>
+                <th>Language</th>
+                <th>Region</th>
+                <th>Niche</th>
+                <th>Note</th>
+              </tr>
+            </thead>
+            <tbody id="client-table-body"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <template id="empty-row-template">
+      <tr>
+        <td colspan="15" class="empty-message">No websites found.</td>
+      </tr>
+    </template>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
