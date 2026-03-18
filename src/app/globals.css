@@ -1,0 +1,496 @@
+:root {
+  color-scheme: dark;
+  --bg: #07111f;
+  --bg-accent: #0f1c31;
+  --panel: rgba(9, 22, 40, 0.82);
+  --panel-strong: #10213a;
+  --panel-soft: rgba(255, 255, 255, 0.05);
+  --text: #eff4ff;
+  --muted: #9db2d0;
+  --line: rgba(255, 255, 255, 0.1);
+  --primary: #6ea8fe;
+  --primary-strong: #8d7dff;
+  --success: #41d49c;
+  --warning: #f8c162;
+  --danger: #f47174;
+  --shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
+  --radius-lg: 28px;
+  --radius-md: 18px;
+  --radius-sm: 12px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top, rgba(110, 168, 254, 0.16), transparent 26%),
+    radial-gradient(circle at right top, rgba(141, 125, 255, 0.16), transparent 22%),
+    linear-gradient(180deg, #07111f 0%, #09111e 45%, #050b15 100%);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text);
+  padding: 0.9rem 1rem;
+  outline: none;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: rgba(110, 168, 254, 0.8);
+  transform: translateY(-1px);
+}
+
+textarea {
+  resize: vertical;
+}
+
+.shell {
+  width: min(1180px, calc(100% - 2rem));
+  margin: 0 auto;
+}
+
+.page-shell {
+  padding: 2rem 0 4rem;
+}
+
+.page-stack {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(18px);
+  background: rgba(4, 10, 18, 0.72);
+  border-bottom: 1px solid var(--line);
+}
+
+.nav-shell {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 0;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.brand p,
+.brand span {
+  margin: 0;
+}
+
+.brand p {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.brand span {
+  color: var(--muted);
+  font-size: 0.84rem;
+}
+
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-strong) 100%);
+  color: #07111f;
+  font-weight: 800;
+}
+
+.nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.nav-links a,
+.pill,
+.status-badge {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 0.5rem 0.9rem;
+  font-size: 0.88rem;
+}
+
+.hero,
+.panel,
+.listing-card,
+.empty-state {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--panel);
+  box-shadow: var(--shadow);
+}
+
+.hero,
+.panel {
+  padding: 1.6rem;
+}
+
+.card-gradient {
+  background:
+    linear-gradient(160deg, rgba(110, 168, 254, 0.18), transparent 32%),
+    linear-gradient(160deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01)),
+    var(--panel);
+}
+
+.hero-home {
+  align-items: center;
+}
+
+.hero,
+.content-grid,
+.feature-grid,
+.two-column,
+.filters-grid,
+.stats-grid,
+.field-grid,
+.button-row,
+.note-panel,
+.listing-header,
+.hero-metrics {
+  display: grid;
+  gap: 1rem;
+}
+
+.hero {
+  grid-template-columns: 1.4fr 1fr;
+}
+
+.hero h1,
+.panel h2,
+.listing-card h3 {
+  margin: 0;
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.05;
+  max-width: 12ch;
+}
+
+.hero-copy,
+.section-copy,
+.panel p,
+.note-panel p,
+.timeline p {
+  color: var(--muted);
+}
+
+.eyebrow {
+  margin: 0 0 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.78rem;
+  color: var(--primary);
+}
+
+.button-row {
+  grid-auto-flow: column;
+  justify-content: start;
+}
+
+.primary-button,
+.secondary-button,
+.danger-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  border: 1px solid transparent;
+  border-radius: 14px;
+  padding: 0.85rem 1.1rem;
+  font-weight: 700;
+  transition: transform 0.2s ease, opacity 0.2s ease, border-color 0.2s ease;
+}
+
+.primary-button {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-strong) 100%);
+  color: #07111f;
+}
+
+.secondary-button {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text);
+  border-color: var(--line);
+}
+
+.danger-button {
+  background: rgba(244, 113, 116, 0.12);
+  color: #ffc5c6;
+  border-color: rgba(244, 113, 116, 0.3);
+}
+
+.primary-button:hover,
+.secondary-button:hover,
+.danger-button:hover {
+  transform: translateY(-1px);
+}
+
+.hero-metrics,
+.feature-grid,
+.filters-grid,
+.field-grid,
+.stats-grid {
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+}
+
+.metric-card,
+.timeline div {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.04);
+  padding: 1rem;
+}
+
+.metric-card span,
+.stats-grid span,
+.price-column span,
+.marketplace-aside span,
+.listing-card a,
+.listing-card p,
+.panel-heading span {
+  color: var(--muted);
+}
+
+.metric-card strong {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 1.6rem;
+}
+
+.feature-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.feature-list {
+  margin: 0;
+  padding-left: 1.2rem;
+  display: grid;
+  gap: 0.8rem;
+  color: var(--muted);
+}
+
+.content-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.two-column {
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+}
+
+.panel-heading {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.4rem;
+}
+
+.admin-form {
+  display: grid;
+  gap: 1.2rem;
+}
+
+.admin-form label,
+.filters-grid label {
+  display: grid;
+  gap: 0.5rem;
+  color: var(--muted);
+}
+
+.checkbox-field {
+  display: flex !important;
+  align-items: center;
+  gap: 0.7rem;
+  padding-top: 2rem;
+}
+
+.checkbox-field input {
+  width: 18px;
+  height: 18px;
+  padding: 0;
+}
+
+.listing-stack {
+  display: grid;
+  gap: 1rem;
+}
+
+.listing-card {
+  padding: 1.3rem;
+}
+
+.listing-header {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  margin-bottom: 1rem;
+}
+
+.listing-actions,
+.card-badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: end;
+  gap: 0.5rem;
+}
+
+.price-column {
+  display: grid;
+  gap: 0.8rem;
+  text-align: right;
+}
+
+.price-column strong,
+.marketplace-aside strong,
+.stats-grid strong {
+  display: block;
+  margin-top: 0.25rem;
+}
+
+.stats-grid {
+  margin-top: 1rem;
+}
+
+.stats-grid.compact {
+  margin-top: 0;
+}
+
+.note-block,
+.note-panel {
+  margin-top: 1rem;
+}
+
+.note-panel {
+  grid-template-columns: minmax(0, 2fr) minmax(240px, 1fr);
+  border-top: 1px solid var(--line);
+  padding-top: 1rem;
+}
+
+.marketplace-aside {
+  display: grid;
+  gap: 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.03);
+  padding: 1rem;
+}
+
+.status-badge {
+  text-transform: capitalize;
+}
+
+.status-available {
+  color: #9cf0c8;
+  border-color: rgba(65, 212, 156, 0.35);
+  background: rgba(65, 212, 156, 0.12);
+}
+
+.status-reserved {
+  color: #ffe2a5;
+  border-color: rgba(248, 193, 98, 0.35);
+  background: rgba(248, 193, 98, 0.1);
+}
+
+.status-sold {
+  color: #ffc5c6;
+  border-color: rgba(244, 113, 116, 0.35);
+  background: rgba(244, 113, 116, 0.1);
+}
+
+.timeline {
+  display: grid;
+  gap: 1rem;
+}
+
+.timeline strong {
+  display: block;
+  margin-bottom: 0.4rem;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 2rem;
+}
+
+@media (max-width: 980px) {
+  .hero,
+  .content-grid,
+  .feature-grid,
+  .two-column,
+  .note-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .hero h1 {
+    max-width: 100%;
+  }
+
+  .price-column,
+  .listing-actions {
+    justify-content: start;
+    text-align: left;
+  }
+}
+
+@media (max-width: 720px) {
+  .nav-shell,
+  .panel-heading,
+  .listing-header {
+    grid-template-columns: 1fr;
+    display: grid;
+  }
+
+  .button-row {
+    grid-auto-flow: row;
+  }
+
+  .page-shell {
+    padding-top: 1.2rem;
+  }
+}
